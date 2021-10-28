@@ -1,0 +1,18 @@
+
+{
+"nom" : "Mohamed " ,
+"prenom" : "po" ,
+"age" : "45 Ans" ,
+"adresse " : "14 Ali Belhwan tunis" ,
+"telephone" : "95632100" ,
+"etat_civil" : "Célibataire" ,
+"etat_de_sante" : "Sain" ,
+"nb_enfants_parrainés" : "4" ,
+"parents_en_parrainage" : "Père" ,
+"revenu_continental" : "Salaire mensuel" ,
+"couverture_sociale" : "Il n'y a pas de couverture sociale" ,
+"exploitation_du_logement" : "Entreprise individuelle" ,
+"depenses_continentales" : "Frais d'études"
+
+
+}
