@@ -54,11 +54,15 @@ public class AuthentificationController {
        else {
            User user = new User();
            Set<Roles> roles = new HashSet<>();
+           
            Roles role = rolesRepo.findByName(eRoles.USER);
            roles.add(role);
            user.setFullName(signup.getFullName());
            user.setEmail(signup.getEmail());
+           user.setContact(signup.getContact());
+
            user.setRoles(roles);
+
            user.setPassword(encoder.encode(signup.getPassword()));
            userRepository.save(user);
            return ResponseEntity.status(HttpStatus.CREATED).body(new Response<String>("Successfully account created", 201));   
@@ -68,7 +72,8 @@ public class AuthentificationController {
     @PostMapping(value = "/signin")
     @CrossOrigin
     public ResponseEntity<?> signIn(@RequestBody LoginRequestDto login){
-
+       try {
+    	   
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login.getEmail(), login.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -79,7 +84,11 @@ public class AuthentificationController {
         for(GrantedAuthority authority: userDetails.getAuthorities()) {
         	roles.add(authority.getAuthority());
         } 
-        return ResponseEntity.ok(new Response<LoginSuccessfulResponseDto>(new LoginSuccessfulResponseDto(userDetails.getId(),jwtToken,userDetails.getUsername(),userDetails.getEmail(), userDetails.isFilledFormulaire(), roles),200));
+         return ResponseEntity.ok(new Response<LoginSuccessfulResponseDto>(new LoginSuccessfulResponseDto(userDetails.getId(),jwtToken,userDetails.getFullName(),userDetails.getUsername(), userDetails.isFilledFormulaire(), roles),200));
+       }
+       catch(Exception ex){
+    	   return ResponseEntity.ok(new Response<String>("email ou mot de passe invalide",404));    	   
+       }
 
     }
 

@@ -75,6 +75,7 @@ public class UserDetailsImpl implements UserDetails {
         // TODO Auto-generated method stub
         return true;
     }
+    
 
     public static UserDetailsImpl build(User user) {
         List<GrantedAuthority> authorities = new ArrayList<>();
